@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+/* Custom properties */
+:root{
+    --light-color: #fff;
+    --green-color: #4fcf70;
+    --light-color-alt: #afb6cd;
+    --primary-background-color: #131417;
+    --secondary-background-color: #252830;
+    --hover-light-color: var(--light-color);
+    --hover-dark-color: var(--primary-background-color);
+    --transparent-light-color: rgba(255,255,255,.05);
+    --transparent-dark-color: rgba(0,0,0,.75);
+    --font-family: 'Nunito Sans', 'sans-serif';
+    --font-size-xsm: 1.2rem;
+    --font-size-sm: 2rem;
+    --font-size-md: 3rem;
+    --font-size-lg: 4rem;
+    --font-size-xl: 5rem;
+    --gap: 2rem;
+    --margin-sm: 2rem;
+    --margin-md: 3rem;
+    --item-min-height-sm: 20rem;
+    --item-min-height-md: 30rem;
+}
+/* Base styles */
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html {
+    /* font-size: 10px; */
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    color: var(--light-color-alt);
+    background-color: var(--primary-background-color);
+    letter-spacing: 1px;
+    transition: background-color .25s, color .25s; 
+    width: 100%;
+}
+
+h1 {
+  font-size: 8rem;
+}
+
+h2 {
+    margin: 2rem;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    color: var(--light-color-alt);
+    text-align: center;
+}
+
+h3 {
+    margin: 2rem;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    color: var(--light-color-alt);
+}
+
+p {
+    margin: var(--margin-md);
+    font-size: var(--font-size-sm)
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 75%; /*Images will not overflow parent containers*/
+    border-radius: 5%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+  text-align: center;
+}
+
+.btn {
+    font: inherit; 
+    color: inherit;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+i {
+    font-size: var(--font-size-md);
+}
+/* Theme color change */
+body.light-theme {
+    --light-color: #3d3d3d;
+    --light-color-alt: rgba(0, 0, 0, .6);
+    --primary-background-color: #fff;
+    --secondary-background-color: #f1f1f1;
+    --hover-light-color: #fff;
+    --hover-dark-color: var(--primary-background-color);
+    --transparent-light-color: rgba(#252830);
+    --transparent-dark-color: rgba(0,0,0,.1);
+}
+/* Reusable classes */
+.container {
+    max-width: 160rem; 
+    margin: 0 auto; 
+    padding: 0 1.5rem; 
+} 
+
+.place-items-center {
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-sm-hidden {
+    display: none; 
+}
+
+.d-grid {
+    display: grid;
+}
+
+.section {
+    padding-block: 5rem;
+}
+
+/* Header */
+.header {
+    background-color: var(--secondary-background-color);
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%; 
+    height: 10rem;
+    z-index: 999; 
+}
+
+.navbar {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+}
+
+.logo-img {
+    max-width: 8rem;
+    margin-right: 2rem;
+}
+
+.logo {
+    font-size: var(--font-size-xl);
+    color: var(--green-color);
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        font-size: 25px;
+    }
+}
+
+
+.menu {
+    position: absolute; 
+    top: 8.5rem;
+    right: 1.5rem;
+    width: 23rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-background-color);
+    opacity: 0; 
+    transform: scale(0);
+    transition: opacity .25s, ease-in;
+}
+
+
+.list {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.menu > .list {
+    flex-direction: column;
+}
+
+.list-link.current {
+    color: var(--light-color);
+}
+
+.close-menu-icon {
+    display: none;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.list-link:hover,
+.btn:hover,
+.btn:hover span {
+    color: var(--green-color);
+}
+
+.special-item {
+    padding: 10px;
+    border: 2px solid var(--green-color);
+}
+
+.moon-icon {
+    display: none;
+}
+
+.light-theme .sun-icon {
+    display: none;
+}
+
+.light-theme .moon-icon {
+    display: block;
+} 
+
+/* Header JavaScript Styles */
+
+.header.activated {
+    box-shadow: 0 1px .5rem var(--transparent-light-color);
+}
+
+.menu.activated {
+    box-shadow: 1px 1px 1rem var(--transparent-light-color);
+    opacity: 1; 
+    transform: scale(1);
+}
+
+.menu-toggle-icon.activated .open-menu-icon {
+    display: none;
+}
+
+.menu-toggle-icon.activated .close-menu-icon {
+    display: block;
+}
+
+.home-solutions-container {
+  margin-top: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20rem;
+  display: block;
+  max-width: 90%;
+  max-height: 80%;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.solution-section {
+  display: flex;
+}
+
+@media screen and (max-width: 1080px) {
+  #utilities-box {
+    margin: auto;
+  }
+  #appliances-box {
+    margin: auto;
+  }
+}
+
+  .utilities-container {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+    
+    height: 60%;
+    position: relative;
+    text-align: center;
+    align-items: center;
+  }
+
+  #utilities-box {
+    margin-top: 10rem;
+    max-width: 40%;
+    transition: .5s; 
+    color: var(--green-color);
+  }
+
+  #appliances-box {
+    margin-top: 10rem;
+    max-width: 40%;
+    transition: .5s; 
+    color: var(--green-color);
+  }
+
+  .utilities-image {
+
+    margin: auto;
+  }
+  
+  .appliances-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+    
+    height: 60%;
+    position: relative;
+    
+  }
+  
+  .appliances-image {
+    margin: auto;
+  }
+  
+  .open-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 4px solid var(--secondary-background-color);
+    margin: 1rem;
+    border-radius: 50px;
+    justify-content: center;
+    font-size: var(--font-size-md);
+    transform: translate(-50%, -50%);
+    background: var(--primary-background-color);
+    color: var(--light-color-alt);
+    transition: .5s;
+  }
+
+  @media screen and (max-width: 1180px) {
+    .solution-section {
+      display: block;
+    }
+    .fact-list {
+      margin: auto;
+      max-width: 80%;
+    } 
+
+    .utilities-image {
+      width: 90%;
+    }
+
+    .appliances-image {
+      width: 90%;
+    }
+
+    .open-btn {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid var(--secondary-background-color);
+      margin: 1rem;
+      border-radius: 50px;
+      justify-content: center;
+      font-size: 10px;
+      transform: translate(-50%, -50%);
+      background: var(--primary-background-color);
+      color: var(--light-color-alt);
+      transition: .5s; 
+    }
+  }
+  
+  .open-btn:hover {
+    background-color: var(--green-color);
+  }
+  
+  #roof-btn {
+    position: absolute;
+    top: 42%;
+    left: 55%;
+  }
+  
+  #solar-btn {
+    position: absolute;
+    top: 45%;
+    left: 25%;
+  }
+  
+  #car-btn {
+    position: absolute;
+    top: 65%;
+    left: 30%;
+  }
+  
+  #thermostat-btn {
+    position: absolute;
+    top: 58%;
+    left: 42%;
+  }
+  
+  #window-btn {
+    position: absolute;
+    top: 75%;
+    left: 60%;
+  }
+  
+  #heater-btn {
+    position: absolute;
+    top: 58%;
+    left: 70%;
+  }
+  
+  #hvac-btn {
+    position: absolute;
+    top: 70%;
+    left: 80%;
+  }
+  
+  #fridge-btn {
+    position: absolute;
+    top: 62%;
+    left: 26%;
+  }
+  
+  #oven-btn {
+    position: absolute;
+    top: 70%;
+    left: 35%;
+  }
+  
+  #dish-btn {
+    position: absolute;
+    top: 70%;
+    left: 45%;
+  }
+  
+  #washer-btn {
+    position: absolute;
+    top: 68%;
+    left: 55%;
+  }
+  
+  #dryer-btn {
+    position: absolute;
+    top: 68%;
+    left: 70%;
+  }
+  
+  .disclaimer {
+    margin: auto;
+    margin-top: 5rem;
+    align-self: center;
+    text-align: center;
+    max-width: 60%;
+  }
+
+  /* footer */
+.footer {
+  background-color: var(--secondary-background-color);
+  width: 100%;
+  display: flex;
+}
+
+.footer-container {
+  /* gap: var(--gap); */
+  width: 100%;
+}
+
+
+.copyright-notice {
+  opacity: .8;
+}
+
+.footer-list {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-title {
+  font-size: var(--font-size-md);
+  text-transform: uppercase;
+  margin-bottom: var(--margin-sm);
+}
+
+@media screen and (max-width: 700px) {
+  .footer-item {
+      margin-bottom: 10rem;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+  }
+  .company-data {
+      order: 0;
+  }
+}
+
+/* Scrollbar */ 
+
+::-webkit-scrollbar {
+  width: 2rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--light-color-alt);
+} 
+
+::-webkit-scrollbar-thumb {
+  background-color: #3f4254;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--green-color);
+}
